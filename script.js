@@ -4,7 +4,8 @@ const currentPrice = document.querySelector("#current-price")
 
 const calculateButton = document.querySelector("#calculate-button")
 
-const output = document.querySelector("#output")
+var output = document.querySelector("#output")
+showOutput("")
 
 function calculateProfitAndLoss(initial,quantity,current){
     
@@ -24,16 +25,17 @@ function calculateProfitAndLoss(initial,quantity,current){
 
     }
     else{
-        showOutput("No profit No Loss")
+        showOutput(`No profit No Loss`)
     }
 }
 
 
-calculateProfitAndLoss(10,10,10)
-
 function submitHandler(){
     if(initialPrice.value==='' || quantityOfStocks.value==='' || currentPrice.value===''){
         showOutput("Please enter all the fields")
+    }
+    else if(initialPrice.value<0 || quantityOfStocks.value<0 || currentPrice.value<0){
+        showOutput("The inputs should be positve. Negative inputs not allowed")
     }
     else{
     var ip = Number(initialPrice.value) 
@@ -45,7 +47,7 @@ function submitHandler(){
 }
 
 function showOutput(str){
-    output.innerHTML=str
+    output.innerText=str
 }
 
 calculateButton.addEventListener("click", submitHandler)
